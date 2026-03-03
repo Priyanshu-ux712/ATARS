@@ -1,270 +1,145 @@
-ATARS v2.0
-Automated Time-Series Analysis & Reporting System
+# ATARS v2.0
+### Automated Time-Series Analysis and Reporting System
 
-Author: Priyanshu
-License: MIT
-Version: 2.0.0
+ATARS is a formal, reproducible, end-to-end time-series analysis framework that transforms raw environmental sensor data into a complete analytical report — automatically.
 
-🔷 Overview
+It integrates statistical operators, machine learning models, deterministic chart generation, and algorithmic LLM grounding verification into a single auditable pipeline.
 
-ATARS (Automated Time-Series Analysis and Reporting System) is a formally specified, domain-agnostic analytical pipeline for environmental time-series datasets.
+---
 
-It combines:
+## 🎯 Problem It Solves
 
-Statistical operators
+Urban air quality stations generate thousands of hourly records per year.  
+Manual analysis is:
 
-Machine learning anomaly detection
+- Repetitive  
+- Time-consuming  
+- Statistically inconsistent  
+- Difficult to reproduce  
+- Risky when AI-generated text is involved  
 
-Forecasting models
+ATARS eliminates manual repetition and enforces statistical correctness with full reproducibility.
 
-AI-assisted narrative generation
+---
 
-Numerical grounding validation
+## 🚀 What ATARS Produces
 
-Reproducible report generation
+Input:  
+CSV or Excel time-series dataset (hourly pollutant data)
 
-All within a single deterministic workflow.
+Output (fully automated):
 
-🚀 What ATARS Does
+- 📄 18-section structured Word report
+- 📊 15 publication-grade analytical charts
+- 📁 JSON statistical contract
+- 🔐 SHA-256 reproducibility audit
+- 📈 G_rate grounding score (LLM validation metric)
 
-Given a structured time-series dataset (e.g., air quality data), ATARS:
+No manual formatting. No manual chart creation. No manual report writing.
 
-Loads and validates data
+---
 
-Assigns quality flags (Q(D))
+## 🧠 Technical Core
 
-Applies formal statistical operators
+ATARS is built on a formally defined statistical foundation.
 
-Detects anomalies (z-score + Isolation Forest)
+### 🔹 16 Formal Operators
+- Data Quality Score: Q(D)
+- Aggregation operator A(D_v)
+- Rolling baseline B(D, W=30)
+- Z-score anomaly detection ζ_d
+- Delta percentage deviation δ_d
+- Confidence intervals
+- Autocorrelation (ACF)
+- Partial autocorrelation (PACF)
+- Pearson correlation
+- OLS regression
 
-Computes correlations and OLS regression
+All operators are deterministic and reproducible.
 
-Performs ACF/PACF temporal analysis
+---
 
-Forecasts PM10 using Holt-Winters
+### 🔹 Machine Learning Enhancements (v2.0)
 
-Generates 15 analytical charts
+- Isolation Forest (multivariate anomaly detection)
+- Holt-Winters triple exponential smoothing (14-day PM10 forecast)
+- Fixed random_state for reproducibility
+- ML modules extend — never replace — formal operators
 
-Produces a formatted Word report
+---
 
-Verifies AI-generated text numerically (RGV)
+### 🔹 Runtime Grounding Verifier (RGV) — Novel Contribution
 
-Generates SHA-256 reproducibility hash
+ATARS introduces an algorithmic safeguard against AI hallucination.
 
-🧠 Core Innovations
-1️⃣ Formal Statistical Framework
+Process:
+1. All computed statistics are stored in a structured JSON contract (J)
+2. The LLM generates narrative text (optional, local model)
+3. Every numerical claim is extracted
+4. Each number is verified against J
+5. Grounding score is computed:
 
-Implements mathematically defined operators:
+G_rate = grounded_sentences / total_numerical_sentences
 
-Aggregation Operator A(D_v)
+This converts LLM validation from a qualitative concept into a measurable metric.
 
-Baseline Operator B(D, W)
+---
 
-Z-score anomaly ζ_d
+## 🔐 Reproducibility & Security
 
-Delta change δ_d
+- SHA-256 hash of JSON contract ensures auditability
+- Deterministic execution (fixed seeds)
+- Fully local execution supported
+- LLM receives aggregated metrics only (never raw data)
+- `--no-llm` mode disables AI completely
 
-Quality Score Q(D)
+---
 
-Confidence Intervals
+## ⚡ Quick Start
 
-Pearson Correlation R
+```bash
+python atars_v2.py --input your_data.csv --city "Delhi" --no-llm
+```
 
-OLS Regression β̂
+Optional (local LLM via Ollama):
 
-ACF / PACF temporal memory
+```bash
+python atars_v2.py --input your_data.csv --city "Delhi" --use-llm
+```
 
-2️⃣ ML-Enhanced Detection (v2.0)
+---
 
-Isolation Forest
+## 📊 Applications
 
-Multivariate anomaly detection
+- Urban air quality monitoring
+- Environmental compliance reporting
+- Smart city analytics
+- Public health research
+- Automated research reporting
+- Reproducible statistical workflows
 
-Works alongside z-score
+---
 
-Detects pattern-based anomalies
+## 🎓 Research Context
 
-Fully local computation
+ATARS is designed as a reproducible analytical framework integrating:
 
-Fixed random_state for reproducibility
+- Formal statistical modeling
+- Machine learning enhancement
+- AI-grounded narrative verification
+- Deterministic audit trails
 
-Holt-Winters Forecast
+The complete research paper is included in this repository.
 
-Triple exponential smoothing
+---
 
-14-day PM10 forecast
+## 📄 License
 
-80% prediction intervals
+MIT License  
+Copyright (c) 2026 Priyanshu  
 
-Pure NumPy implementation
+Free to use, modify, and distribute with attribution.
 
-3️⃣ Response Grounding Validator (RGV)
+---
 
-Every number generated by the LLM is:
-
-Extracted
-
-Compared against JSON contract J
-
-Validated with tolerance bounds
-
-Sentences are classified as:
-
-GROUNDED
-
-PARTIALLY GROUNDED
-
-UNGROUNDED
-
-NON-NUMERICAL
-
-Grounding Rate (G_rate) ensures numerical integrity.
-
-4️⃣ Security Model
-
-All computation is local
-
-No raw data sent externally
-
-LLM receives only aggregated JSON (J)
-
-Zero telemetry
-
-Zero external API calls unless explicitly enabled
-
-SHA-256 hash ensures reproducibility
-
-📊 Output Artifacts
-
-Each run generates:
-
-15 publication-grade charts
-
-Word (.docx) analytical report
-
-JSON statistical contract (J)
-
-Grounding verification file
-
-ML anomaly comparison summary
-
-Forecast output
-
-SHA-256 hash of outputs
-
-🔐 Reproducibility
-
-ATARS ensures deterministic execution:
-
-Fixed seeds
-
-Canonical serialization
-
-Versioned configuration
-
-SHA-256 hash of final output
-
-If input data and config remain unchanged → output remains identical.
-
-🛠 Installation
-
-Clone repository:
-
-git clone https://github.com/yourusername/ATARS.git
-cd ATARS
-
-Install dependencies:
-
-pip install pandas numpy scipy matplotlib seaborn python-docx scikit-learn
-
-Optional (for local AI narrative):
-
-Install Ollama
-ollama pull llama3.2
-▶ Usage
-
-Basic run:
-
-python atars_v2_opensource.py --data your_data.csv --city "Delhi"
-
-Disable LLM:
-
-python atars_v2_opensource.py --data your_data.csv --no-llm
-
-Disable forecast:
-
-python atars_v2_opensource.py --data your_data.csv --no-forecast
-📈 Analytical Capabilities
-
-Data Quality Assessment Q(D)
-
-Rolling Baseline (30-day)
-
-Threshold exceedance detection (WHO AQG 2021)
-
-Multivariate anomaly detection
-
-Temporal memory structure (ACF/PACF)
-
-Regression modeling
-
-Seasonal analysis
-
-Diurnal patterns
-
-Day-of-week variation
-
-VOC/BTEX monitoring
-
-Calendar heatmaps
-
-Forecast modeling
-
-🎯 Intended Applications
-
-Environmental monitoring
-
-Smart city dashboards
-
-Public health analytics
-
-Industrial compliance reporting
-
-Academic research
-
-Policy analysis
-
-⚠ Limitations
-
-Correlation ≠ Causation
-
-Forecast assumes additive seasonality
-
-Quality score measures completeness, not calibration accuracy
-
-Designed for structured time-series data
-
-📜 License
-
-MIT License © 2026 Priyanshu
-
-You are free to:
-
-Use
-
-Modify
-
-Distribute
-
-Build commercial applications
-
-With attribution.
-
-👤 Author
-
-Priyanshu
-B.Tech CSE
-Global Institute of Technology and Management
-Haryana, India
-
-Focused on reproducible analytical systems, automation, and research-grade reporting pipelines.
+### ATARS — Formal. Reproducible. Automated.
