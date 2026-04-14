@@ -101,13 +101,13 @@ This converts LLM validation from a qualitative concept into a measurable metric
 ## ⚡ Quick Start
  
 ```bash
-python atars_v2.py --input your_data.csv --city "Delhi" --no-llm
+python atars_v2.py --data "input_your_data.csv" --city "Delhi" --no-llm
 ```
  
 Optional (local LLM via Ollama):
  
 ```bash
-python atars_v2.py --input your_data.csv --city "Delhi" --use-llm
+python atars_v2.py --data "input_your_data.csv" --city "Delhi" --use-llm
 ```
  
 ---
